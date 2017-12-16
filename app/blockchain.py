@@ -2,6 +2,7 @@ import hashlib
 import json
 from textwrap import dedent
 from time import time
+from urllib.parse import urlparse
 
 
 
@@ -9,6 +10,7 @@ class Blockchain(object):
     def __init__(self):
         self.chain = []
         self.current_transactions = []
+        self.nodes = set()
 
         # Create the genesis block
         self.new_block(previous_hash=1, proof=100)
@@ -29,6 +31,7 @@ class Blockchain(object):
 
         return block
     
+    
     def new_transaction(self, sender, recipient, amount):
         # Adds a new transaction to the list of transactions
         self.current_transactions.append({
@@ -42,11 +45,17 @@ class Blockchain(object):
     def proof_of_work(self, last_proof):
 
         proof = 0
-
         while self.valid_proof(last_proof, proof) is False:
             proof += 1
         
         return proof
+
+
+    def register_node(self, address):
+
+        parsed_url = urlparse(address)
+        self.nodes.add(parsed_url.netloc)
+
 
     @staticmethod
     def valid_proof(last_proof, proof):
