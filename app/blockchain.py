@@ -44,7 +44,7 @@ class Blockchain(object):
         proof = 0
 
         while self.valid_proof(last_proof, proof) is False:
-            prooof += 1
+            proof += 1
         
         return proof
 
