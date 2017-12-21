@@ -30,7 +30,7 @@ class App extends Component {
 
     const menu_items = site_routes.map((route) => (
       {
-          as: () => <Link to={`${route.path}`}>{route.name}</Link>   
+          as: () => <Menu.Item className=''><Link to={`${route.path}`}>{route.name}</Link></Menu.Item>   
       }
   ))
 

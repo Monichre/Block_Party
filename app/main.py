@@ -18,6 +18,14 @@ blockchain = Blockchain()
 @app.route('/mine', methods=['GET'])
 def mine():
 
+    request_data = request.get_json()
+    print(request_data)
+    required = ['musician_id', 'user_id']
+
+    if not all(k in request_data for k in required):
+        return 'Missing Necessary Data in Request', 400
+
+
     last_block = blockchain.last_block
     last_proof = last_block['proof']
     proof = blockchain.proof_of_work(last_proof)
