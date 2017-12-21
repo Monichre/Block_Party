@@ -6,22 +6,25 @@
     "axios": "^0.17.1",
     "electron": "^1.7.10",
     "firebase": "^4.8.1",
+    "foreman": "^2.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-sound": "^0.10.0",
+    "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.1"
   },
   "devDependencies": {
     "react-scripts": "1.0.17"
   },
-  "main": "src/Electron.js",
+  "main": "src/electron.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "dev": "nf start -p 3000"
   },
   "proxy": "http://localhost:5000"
 }

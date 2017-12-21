@@ -11,32 +11,37 @@ const site_routes = [
 	{
         path: '/',
 		exact: true,
-        component: Home
+        component: Home,
+        name: 'Home'
 	},
 	{
         path: '/users/dashboard/:user_id',
-        component: Dashboard
+        component: Dashboard,
+        name: 'Dashboard'
 	},
 	{
 		path: '/signup',
 		exact: true,
-        component: SignUp
+        component: SignUp,
+        name: 'SignUp'
 	},
 	{
 		path: '/login',
 		exact: true,
-        component: Login
+        component: Login,
+        name: 'Login'
 	},
 	{
-		path: 'listen',
+		path: '/listen',
 		exact: true,
-        component: Listen
+        component: Listen,
+        name: 'Listen'
 	}
 ]
 export default (
 	<div>
 		{site_routes.map((route, i) =>(
-			<Route exact={route.exact} path={route.path} render={(props) => (
+			<Route exact={route.exact} key={route.name} path={route.path} render={(props) => (
 				<route.component key={i} {...props} />
 			)}/>
 		))}
