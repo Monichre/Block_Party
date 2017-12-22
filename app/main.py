@@ -1,8 +1,8 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, json, redirect
 from requests import Request
 from uuid import uuid4
 from textwrap import dedent
-from blockchain import Blockchain
+from models.blockchain import Blockchain
 
 
 # Instantiate the server --> will move this out of this file at some point
@@ -80,6 +80,27 @@ def full_chain():
 
     return jsonify(response), 200
 
+@app.route('/spotify/signup', methods = ['POST'])
+def signup():
+
+    data = request.get_json()
+    print(data)
+    
+    client_id = data['client_id']
+    client_secret = data['client_secret']
+    scopes = data['scopes']
+    redirect_uri = data['redirect_URI']
+
+    print(client_id)
+    print(client_secret)
+    print(scopes)
+    print(redirect_uri)
+    
+    redirect('https://accounts.spotify.com/authorize' + '?response_type=code' + '&client_id=' + client_id + '&scope=' + json.dumps(scopes) + '&redirect_uri=' + redirect_uri)
+
+    return 'success'
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+

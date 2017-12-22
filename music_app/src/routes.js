@@ -36,7 +36,14 @@ const site_routes = [
 		exact: true,
         component: Listen,
         name: 'Listen'
+	},{
+	path: '/callback',
+	exact: false,
+	component: Dashboard,
+	name: 'callback'
 	}
+	
+	
 ]
 export default (
 	<div>
