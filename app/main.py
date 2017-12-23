@@ -15,12 +15,16 @@ node_identifier = str(uuid4()).replace('-', '')
 blockchain = Blockchain()
 
 
-@app.route('/mine', methods=['GET'])
+@app.route('/mine', methods=['POST'])
 def mine():
 
     request_data = request.get_json()
-    print(request_data)
+    
     required = ['musician_id', 'user_id']
+
+    
+    print(request_data['musician_id'])
+    print(request_data['user_id'])
 
     if not all(k in request_data for k in required):
         return 'Missing Necessary Data in Request', 400

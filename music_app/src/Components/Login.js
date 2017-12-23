@@ -54,13 +54,7 @@ export default class Login extends Component {
     }
     handleSpotifyLogin(e){
         e.preventDefault()
-
         this.login()
-
-    
-           
-
-
     }
     render() {
         return (
