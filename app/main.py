@@ -18,13 +18,10 @@ blockchain = Blockchain()
 @app.route('/mine', methods=['POST'])
 def mine():
 
-    request_data = request.get_json()
-    
+    request_data = request.get_json()    
     required = ['musician_id', 'user_id']
 
-    
-    print(request_data['musician_id'])
-    print(request_data['user_id'])
+    print(request_data['user_id'] + ' is listening to ' + request_data['musician_id'] + '. 25% of this BlockNote attributed to ' + request_data['user_id'] + ', 50% to ' + request_data['musician_id'])
 
     if not all(k in request_data for k in required):
         return 'Missing Necessary Data in Request', 400

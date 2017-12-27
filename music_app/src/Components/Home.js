@@ -68,7 +68,7 @@ export default class Home extends Component {
                     <Segment
                         inverted
                         textAlign='center'
-                        style={{ minHeight: 700, padding: '1em 0em', backgroundImage: 'url(tape.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+                        style={{ minHeight: 700, padding: '1em 0em', backgroundImage: 'url(neon.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
                         vertical
                     >
                         <Container>
@@ -90,7 +90,7 @@ export default class Home extends Component {
                                 as='h1'
                                 content='Block Party'
                                 inverted
-                                style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '3em' }}
+                                style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '5em' }}
                             />
                             <Header
                                 as='h2'
@@ -120,7 +120,7 @@ export default class Home extends Component {
                                     bordered
                                     rounded
                                     size='large'
-                                    src='neon.jpg'
+                                    src='tape.jpg'
                                 />
                             </Grid.Column>
                         </Grid.Row>

@@ -29,28 +29,28 @@ const FixedMenu = () => (
         <Container>
             <Menu.Item className=''><Link to='/'><h1>Block Party</h1></Link></Menu.Item>
             <Menu.Menu position='right'>
-                {menu_items}    
+                {menu_items}
             </Menu.Menu>
         </Container>
     </Menu>
 )
 const playlist = [
-  {
-    url: '/songs/Nikes.mp3',
-    cover: 'spotify.jpeg',
-    title: 'Nikes',
-    artist: [
-      'Frank Ocean'
-    ]
-  },
-  {
-    url: '/songs/Ivy.mp3',
-    cover: 'spotify.jpeg',
-    title: 'Ivy',
-    artist: [
-      'Frank Ocean'
-    ]
-  }
+    {
+        url: '/songs/Nikes.mp3',
+        cover: 'spotify.jpeg',
+        title: 'Nikes',
+        artist: [
+            'Frank Ocean'
+        ]
+    },
+    {
+        url: '/songs/Ivy.mp3',
+        cover: 'spotify.jpeg',
+        title: 'Ivy',
+        artist: [
+            'Frank Ocean'
+        ]
+    }
 ]
 
 export default class Dashboard extends Component {
@@ -165,14 +165,14 @@ export default class Dashboard extends Component {
 
         Axios({
             method: 'post',
-            url:'/mine',
+            url: '/mine',
             data: {
                 musician_id: _this.state.playlist[counter].artist[0],
                 user_id: _this.state.user_name
             }
         }).then((response) => {
             console.log(response)
-            if(response.status === 200) {
+            if (response.status === 200) {
                 alert(`Congrats! You're now mining on Block Party with a ${response.data.message}, you've earned ${response.data.transactions[0].amount} BlockNote`)
             }
         }).catch((error) => {
@@ -184,12 +184,12 @@ export default class Dashboard extends Component {
             soundIs_: 'PAUSED'
         })
     }
-    stopThatTrack(){
+    stopThatTrack() {
         this.setState({
             soundIs_: 'STOPPED'
         })
     }
-    nextTrack(){
+    nextTrack() {
 
     }
     prevTrack() {
@@ -204,7 +204,7 @@ export default class Dashboard extends Component {
         return (
             <div>
                 <FixedMenu />
-                <Container style={{ padding: '5em 0em' , marginTop: '40px'}}>
+                <Container style={{ padding: '5em 0em', marginTop: '40px' }}>
                     <Grid columns={3}>
 
                         <Grid.Column >
@@ -228,11 +228,49 @@ export default class Dashboard extends Component {
                                     </List>
                                 </Card.Content>
                             </Card>
+
+                        </Grid.Column>
+
+                        <Grid.Column>
+                            <Card>
+                                <Image src={this.state.soundIs_ != 'PLAYING' ? 'tape.jpg' : this.state.playlist[counter].cover} />
+
+                                <Sound
+                                    url={this.state.playlist[counter].url}
+                                    playStatus={this.state.soundIs_}
+                                    playFromPosition={0 /* in milliseconds */}
+
+                                />
+                                <Card.Content>
+                                    <Card.Header>
+                                        <h1>
+                                            {this.state.playlist[counter].title}, {this.state.playlist[counter].artist[0]}
+                                        </h1>
+                                    </Card.Header>
+                                    <Card.Description>
+                                        <List>
+                                            <Icon name='play' onClick={this.playThatTrack.bind(this)} />
+                                            <Icon name='pause' onClick={this.pauseThatTrack.bind(this)} />
+                                            <Icon name='stop' onClick={this.stopThatTrack.bind(this)} />
+                                        </List>
+                                    </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <a>
+                                        <Icon name='user' />
+                                        22 Likes
+                                        </a>
+                                </Card.Content>
+                            </Card>
+                        </Grid.Column>
+
+                        <Grid.Column>
+                            <Header as='h2'>Your Listening Portfolio</Header>
                             <Card>
                                 <Card.Content>
                                     <Card.Header>
                                         Top Tracks
-                                    </Card.Header>
+                                </Card.Header>
                                 </Card.Content>
                                 <Card.Content>
                                     <Feed>
@@ -243,7 +281,6 @@ export default class Dashboard extends Component {
                                                     <Feed.Date>
                                                         <List horizontal>
                                                             <List.Item icon='signal' content={track.popularity} />
-                                                            <List.Item icon='signal' content={track.followers} />
                                                         </List>
                                                     </Feed.Date>
                                                     <Feed.Summary>
@@ -260,7 +297,7 @@ export default class Dashboard extends Component {
                                 <Card.Content>
                                     <Card.Header>
                                         Top Artists
-                                    </Card.Header>
+                                </Card.Header>
                                 </Card.Content>
                                 <Card.Content>
                                     <Feed>
@@ -277,7 +314,7 @@ export default class Dashboard extends Component {
                                                     <Feed.Summary>
                                                         <a>{artist.title}</a> <br />
                                                         <List>
-                                                            {artist.genres.splice(0,3).map((genre) => (
+                                                            {artist.genres.splice(0, 3).map((genre) => (
                                                                 <List.Item icon='tag' content={genre} />
                                                             ))}
 
@@ -290,86 +327,6 @@ export default class Dashboard extends Component {
                                     </Feed>
                                 </Card.Content>
                             </Card>
-                        </Grid.Column>
-
-                        <Grid.Column>
-                            <Card>
-                                <Image src={this.state.soundIs_ != 'PLAYING' ? 'tape.jpg' : this.state.playlist[counter].cover} />
-                                
-                                <Sound
-                                    url={this.state.playlist[counter].url}
-                                    playStatus={this.state.soundIs_}
-                                    playFromPosition={0 /* in milliseconds */}
-                                  
-                                    />
-                                    <Card.Content>
-                                        <Card.Header>
-                                            <h1>
-                                                {this.state.playlist[counter].title}, {this.state.playlist[counter].artist[0]}
-                                            </h1>
-                                        </Card.Header>
-                                        <Card.Description>
-                                            <List>
-                                                <Icon name='play' onClick={this.playThatTrack.bind(this)}/>
-                                                <Icon name='pause' onClick={this.pauseThatTrack.bind(this)}/>
-                                                <Icon name='stop' onClick={this.stopThatTrack.bind(this)}/>
-                                            </List>
-                                        </Card.Description>
-                                    </Card.Content>
-                                    <Card.Content extra>
-                                        <a>
-                                            <Icon name='user' />
-                                            22 Likes
-                                        </a>
-                                    </Card.Content>
-                            </Card>
-                        </Grid.Column>
-
-                        <Grid.Column>
-                            <Header as='h2'>Your Listening Portfolio</Header>
-                            <Menu attached tabular widths={3}>
-                                <Menu.Item active as='a'>Active Item</Menu.Item>
-                                <Menu.Item as='a'>Item</Menu.Item>
-                                <Menu.Item as='a'>Item</Menu.Item>
-                            </Menu>
-                            <br />
-                            <br />
-                            <Segment attached='bottom'>
-                                <Header as='h2'>Trending</Header>
-                                <Segment.Group>
-                                    <Segment>
-                                        <p>Top</p>
-                                    </Segment>
-                                    <Segment.Group>
-                                        <Segment>
-                                            <p>Nested Top</p>
-                                        </Segment>
-                                        <Segment>
-                                            <p>Nested Middle</p>
-                                        </Segment>
-                                        <Segment>
-                                            <p>Nested Bottom</p>
-                                        </Segment>
-                                    </Segment.Group>
-                                    <Segment>
-                                        <p>Middle</p>
-                                    </Segment>
-                                    <Segment.Group horizontal>
-                                        <Segment>
-                                            <p>Top</p>
-                                        </Segment>
-                                        <Segment>
-                                            <p>Middle</p>
-                                        </Segment>
-                                        <Segment>
-                                            <p>Bottom</p>
-                                        </Segment>
-                                    </Segment.Group>
-                                    <Segment>
-                                        <p>Bottom</p>
-                                    </Segment>
-                                </Segment.Group>
-                            </Segment>
                         </Grid.Column>
                     </Grid>
                 </Container>
